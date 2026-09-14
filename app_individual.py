@@ -212,7 +212,18 @@ def individual_range(dates_range,n_exp,s_exp):
         try:
             n,s,vix,_=calculate_day(dt,n_exp,s_exp,3.30)
             if np.isfinite(n['straddle']) and np.isfinite(s['straddle']):
-                rows.append({'Date':dt,'India VIX':vix,'NIFTY Straddle':n['straddle'],'NIFTY Final Strike':n['final_strike'],'SENSEX Straddle':s['straddle'],'SENSEX Final Strike':s['final_strike']})
+                rows.append({
+                    'Date':dt,
+                    'India VIX':vix,
+                    'NIFTY Spot':n['spot'],
+                    'NIFTY Synthetic Future':n['synthetic_future'],
+                    'NIFTY Final Strike':n['final_strike'],
+                    'NIFTY Straddle':n['straddle'],
+                    'SENSEX Spot':s['spot'],
+                    'SENSEX Synthetic Future':s['synthetic_future'],
+                    'SENSEX Final Strike':s['final_strike'],
+                    'SENSEX Straddle':s['straddle']
+                })
         except Exception: continue
     return pd.DataFrame(rows)
 
