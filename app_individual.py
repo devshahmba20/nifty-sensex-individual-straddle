@@ -174,6 +174,19 @@ with e2: sensex_exp=st.selectbox("SENSEX Expiry",s_expiries)
 
 n,s,vix,_=calculate_day(selected_date,nifty_exp,sensex_exp,3.30)
 
+# Key market values: Spot + Synthetic Future
+st.markdown('<div class="section-title">📊 Spot & Synthetic Future</div>',unsafe_allow_html=True)
+k1,k2,k3,k4=st.columns(4)
+with k1:
+    st.metric("NIFTY Spot",f"{n['spot']:.2f}" if np.isfinite(n['spot']) else "N/A")
+with k2:
+    st.metric("NIFTY Synthetic Future",f"{n['synthetic_future']:.2f}" if np.isfinite(n['synthetic_future']) else "N/A")
+with k3:
+    st.metric("SENSEX Spot",f"{s['spot']:.2f}" if np.isfinite(s['spot']) else "N/A")
+with k4:
+    st.metric("SENSEX Synthetic Future",f"{s['synthetic_future']:.2f}" if np.isfinite(s['synthetic_future']) else "N/A")
+
+st.markdown('<div class="section-title">💰 Individual Straddle</div>',unsafe_allow_html=True)
 m1,m2=st.columns(2)
 with m1:
     st.metric("NIFTY Individual Straddle",f"{n['straddle']:.2f}" if np.isfinite(n['straddle']) else "N/A")
